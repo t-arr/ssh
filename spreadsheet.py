@@ -38,9 +38,14 @@ class SpreadSheet:
                         return "#Error"
                     except ValueError:
                         pass
-                elif "+" in ref_value:
-                    parts = ref_value.split("+")
-                    if all(part.strip().isdigit() for part in parts):
-                        return str(sum(int(part.strip()) for part in parts))
+                elif "+" in ref_value or "-" in ref_value or "*" in ref_value or "/" in ref_value:
+                    try:
+                        result = eval(ref_value, {}, self._cells)
+                        if isinstance(result, int):
+                            return result
+                        else:
+                            return "#Error"
+                    except:
+                        return "#Error"
             return "#Error"
 
