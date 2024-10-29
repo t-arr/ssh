@@ -49,4 +49,9 @@ class TestSpreadSheet(TestCase):
         spreadsheet.set("B1", "42")
         spreadsheet.set("A1", "=B1")
         self.assertEqual("42", spreadsheet.evaluate("A1"))
-    
+
+    def test_formula_reference_non_valid_integer(self):
+        spreadsheet = SpreadSheet()
+        spreadsheet.set("B1", "42.5")
+        spreadsheet.set("A1", "=B1")
+        self.assertEqual("#Error", spreadsheet.evaluate("A1"))

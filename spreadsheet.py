@@ -24,9 +24,17 @@ class SpreadSheet:
             elif value.startswith("='") and value.endswith("'"):
                 return value[2:-1]
             elif value.startswith("="):
-                if value[1:].isdigit():
-                    return value[1:]
-                elif value[1:] in self._cells:
-                    return self._cells[value[1:]]
+                ref_value = value[1:]
+                if ref_value.isdigit():
+                    return ref_value
+                elif ref_value in self._cells:
+                    referenced_value = self._cells[ref_value]
+                    if referenced_value.isdigit():
+                        return referenced_value
+                    try:
+                        float(referenced_value)
+                        return "#Error"
+                    except ValueError:
+                        pass
             return "#Error"
 
