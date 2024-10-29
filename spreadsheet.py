@@ -29,6 +29,8 @@ class SpreadSheet:
                     return ref_value
                 elif ref_value in self._cells:
                     referenced_value = self._cells[ref_value]
+                    if cell == referenced_value[1:]:
+                        return "#Circular"
                     if referenced_value.isdigit():
                         return referenced_value
                     try:
