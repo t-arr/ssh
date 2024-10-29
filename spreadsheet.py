@@ -23,7 +23,10 @@ class SpreadSheet:
                 return value[1:-1]
             elif value.startswith("='") and value.endswith("'"):
                 return value[2:-1]
-            elif value.startswith("=") and value[1:].isdigit():
-                return value[1:]
+            elif value.startswith("="):
+                if value[1:].isdigit():
+                    return value[1:]
+                elif value[1:] in self._cells:
+                    return self._cells[value[1:]]
             return "#Error"
 
