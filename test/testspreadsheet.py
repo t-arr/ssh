@@ -66,3 +66,8 @@ class TestSpreadSheet(TestCase):
         spreadsheet = SpreadSheet()
         spreadsheet.set("A1", "=1+3")
         self.assertEqual("4", spreadsheet.evaluate("A1"))
+
+    def test_simple_incorrect_addition(self):
+        spreadsheet = SpreadSheet()
+        spreadsheet.set("A1", "=1+3.5")
+        self.assertEqual("#Error", spreadsheet.evaluate("A1"))
